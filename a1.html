@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Frame Animation</title>
+
+  <style>
+    /* General body styling */
+    body {
+      margin: 0;
+      background-color: #0C0B0A;
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Container for frames */
+    .frame-container {
+      position: relative;
+      width: 1652px;
+      height: 1155px;
+      overflow: hidden;
+    }
+
+    /* Frames (absolute positioning) */
+    .frame {
+      position: absolute;
+      width: 1652px;
+      height: 1155px;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: opacity 700ms ease-out;
+    }
+
+    /* Active frame to show */
+    .active {
+      opacity: 1;
+    }
+
+    /* Text Styling */
+    .frame h1 {
+      font-size: 36px;
+      font-weight: 900;
+      color: white;
+      text-align: left;
+      position: absolute;
+      top: 218px;
+      left: 1188px;
+    }
+
+    /* Animation Logic */
+    @keyframes slideIn {
+      0% {
+        transform: translateX(100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideOut {
+      0% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+      100% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="frame-container">
+    <div class="frame active" id="frame1">
+      <h1>Frame 65</h1>
+    </div>
+
+    <div class="frame" id="frame2">
+      <h1>Frame 66</h1>
+    </div>
+
+    <div class="frame" id="frame3">
+      <h1>Frame 67</h1>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript Logic to switch frames every 3 seconds
+    const frames = document.querySelectorAll('.frame');
+    let currentFrame = 0;
+
+    function changeFrame() {
+      frames[currentFrame].classList.remove('active');
+      currentFrame = (currentFrame + 1) % frames.length;
+      frames[currentFrame].classList.add('active');
+    }
+
+    // Change frame every 3 seconds (3000ms)
+    setInterval(changeFrame, 3000);
+  </script>
+
+</body>
+</html>
